@@ -1,0 +1,38 @@
+@startuml
+title ESI-SPORT Use Cases
+
+!define DARKBLUE
+!include styles.puml
+
+left to right direction
+
+
+' actors definition
+actor Admin as "L'Administrateur"
+actor user as "Le Visiteur"
+
+
+rectangle Esi-Sport {
+    ' use cases definition
+    usecase consultMatches as "Consulter Matchs" 
+    usecase consultClassement as "Consulter Classement InterEcole"
+    usecase searchBlog as "Rechercher Articles Blog"
+    usecase commentBlog as "Commenter Article Blog" 
+    usecase manageBlog as "Gérer Blog" 
+    usecase manageSports as "Gérer Matchs" 
+    usecase manageClubs as "Gérer Clubs" 
+    
+    
+    ' actors relations
+    (manageBlog) -- Admin 
+    (manageSports) -- Admin 
+    (manageClubs) -- Admin 
+
+    user -- (consultMatches)
+    user -- (searchBlog)
+    user -- (commentBlog)
+    user -- (consultClassement)
+
+}
+
+@enduml

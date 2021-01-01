@@ -1,0 +1,183 @@
+@startuml
+title ESI-SPORT Classes
+
+!define DARKBLUE
+!include styles.puml
+
+
+
+note as N1
+     L'atrribut **isReply**
+        Permet de savoir si 
+        le commentaire 
+        est une réponse à un autre
+end note
+
+note as N2
+     L'atrribut **publish**
+         est par défaut à false,
+         il permet d'écrire des brouillons
+         d'articles. Et une fois que l'article
+         a été validé, on peut le changer pour
+         publier l'article
+end note
+
+package Blog {
+    abstract class AbstractArticle <<abstract>> {
+        id: int
+        content: string
+        datePublish: DateTime = null
+        publish: boolean = false
+    }
+
+    class Article {
+        title: string
+        slug: string
+    }
+
+    class InfoFlash {
+        id: int
+    }
+
+    class Comment {
+        id: int
+        author: string
+        content: string
+        isReply: bool
+        dateCreation: DateTime
+    }
+
+    class Tag {
+        id: int
+        tag: string
+    }
+
+
+    ' Associations
+    Comment ..... N1
+    AbstractArticle .... N2
+
+    Article  *--  Comment : Has 
+    Comment  *--  Comment : Is Reply
+    Article "Many" o-- "Many" Tag : Has
+
+    AbstractArticle <|-- Article 
+    AbstractArticle <|-- InfoFlash 
+
+}
+
+note as N3
+la valeur par défaut
+de **label** est :
+    - Match du JJ/MM/AAAA
+end note
+
+'note as N4
+'l'atrribut **negativeLossPoints** 
+'    permet de savoir si un tournoi a 
+'    des points négatifs
+'end note
+
+package SportMagazine {
+    
+    class Match {
+        id: int
+        label: string
+        date: DateTime
+        scoreClub1: int = 0
+        scoreClub2: int = 0
+        hasFinished: boolean = false
+        --
+        finishMatch()
+    }
+
+
+    class Goal {
+        id: int
+        points: int
+        scoreAt: DateTime
+    }
+
+    class Club {
+        id: int
+        logo: Image
+        name: string
+        nickName: string
+        image: Image
+    }
+
+    class Position {
+        id: int
+        name: string
+    }
+
+    class Player {
+        id: int
+        name: string
+        height: float
+        number: int
+        dateBegin: Date
+        description: string = null
+        image: Image = null
+        dateEnd: Date = null
+        isStillPlaying: boolean = true
+    }
+
+    class Sport {
+        id: int
+        name: string
+        individual: boolean = false
+    }
+
+    class InterEcole {
+        id: int
+        year: int
+'        negativeLossPoints: boolean
+    }
+
+    Sport "One" -- "Many" Club : Is of club
+    Club  *-- Player : Has
+
+    N3 ... Match
+
+
+    InterEcole "1" -- "0..*" Match
+    Goal "One" - "One" Player : Score
+
+
+    Sport "One" -- "Many" InterEcole : Belongs To
+    Match "*" -left- "1" Club : Play
+    Match  *-- Goal : Has
+    Player "*" - "1" Position : Is At
+    Position --* Sport : Has
+}
+
+package Auth {
+    
+    class User  {
+        login: string
+        firstName: string
+        lastName: string
+        password: string
+        authenticate() : bool
+        getRoles() : array
+    }
+
+    class Admin {
+        id: int
+        getRoles() : array
+    }
+
+'    class Editor {
+'        id: int
+'        getRoles()
+'    }
+
+    User <|- Admin
+'    User <|- Editor
+
+    Admin "One" -- "Many" Article : Writes
+
+}
+
+@enduml
