@@ -53,6 +53,7 @@ package Blog {
     }
 
 
+
     ' Associations
     Comment ..... N1
     AbstractArticle .... N2
@@ -62,14 +63,13 @@ package Blog {
     Article "Many" o-- "Many" Tag : Has
 
     AbstractArticle <|-- Article 
-    AbstractArticle <|-- InfoFlash 
-
+    AbstractArticle <|-- InfoFlash
 }
 
 note as N3
 la valeur par défaut
 de **label** est :
-    - Match du JJ/MM/AAAA
+    - Recontre du JJ/MM/AAAA
 end note
 
 'note as N4
@@ -80,7 +80,7 @@ end note
 
 package SportMagazine {
     
-    class Match {
+    class Encounter {
         id: int
         label: string
         date: DateTime
@@ -88,22 +88,21 @@ package SportMagazine {
         scoreClub2: int = 0
         hasFinished: boolean = false
         --
-        finishMatch()
+        finishEncounter()
     }
 
 
     class Goal {
         id: int
         points: int
-        scoreAt: DateTime
+        scoredAt: DateTime
     }
 
     class Club {
         id: int
         logo: Image
         name: string
-        nickName: string
-        image: Image
+        nickName: string = null
     }
 
     class Position {
@@ -116,17 +115,17 @@ package SportMagazine {
         name: string
         height: float
         number: int
-        dateBegin: Date
+        beginPlayingAt: Date
         description: string = null
         image: Image = null
-        dateEnd: Date = null
+        endPlayingAt: Date = null
         isStillPlaying: boolean = true
     }
 
     class Sport {
         id: int
         name: string
-        individual: boolean = false
+        isIndividual: boolean = false
     }
 
     class InterEcole {
@@ -135,21 +134,31 @@ package SportMagazine {
 '        negativeLossPoints: boolean
     }
 
+    class EncounterSport {
+        id: int
+    }
+
     Sport "One" -- "Many" Club : Is of club
     Club  *-- Player : Has
 
-    N3 ... Match
+    N3 ... Encounter
 
 
-    InterEcole "1" -- "0..*" Match
     Goal "One" - "One" Player : Score
 
+    EncounterSport "Many" -- "One" Encounter
+    EncounterSport "Many" - "One" Sport
+    InterEcole "One" -- "Many" EncounterSport
 
-    Sport "One" -- "Many" InterEcole : Belongs To
-    Match "*" -left- "1" Club : Play
-    Match  *-- Goal : Has
+'    InterEcole "One" -- "Many" Encounter
+'    Encounter "Many" -- "One" Sport : Happens
+
+    Encounter "Many" --left-- "One" Club : Plays
+    Encounter  *-- Goal : Has
     Player "*" - "1" Position : Is At
     Position --* Sport : Has
+
+    Club "One" *-- "One" Player : Captain
 }
 
 package Auth {

@@ -8,30 +8,40 @@ left to right direction
 
 
 ' actors definition
-actor Admin as "L'Administrateur"
-actor user as "Le Visiteur"
-
+actor admin as "Administrateur"
+actor user as "Visiteur"
+actor editor as "Editeur"
+actor supervisor as "Superviseur"
+actor sportMaster as "Gestionnaire Sportif"
 
 rectangle Esi-Sport {
     ' use cases definition
-    usecase consultMatches as "Consulter Matchs" 
+    usecase consultMatches as "Consulter Matchs"
     usecase consultClassement as "Consulter Classement InterEcole"
     usecase searchBlog as "Rechercher Articles Blog"
-    usecase commentBlog as "Commenter Article Blog" 
-    usecase manageBlog as "Gérer Blog" 
-    usecase manageSports as "Gérer Matchs" 
-    usecase manageClubs as "Gérer Clubs" 
-    
-    
-    ' actors relations
-    (manageBlog) -- Admin 
-    (manageSports) -- Admin 
-    (manageClubs) -- Admin 
+    usecase commentBlog as "Commenter Article Blog"
+    usecase editBlog as "Créer articles Blog"
+    usecase publishBlog as "Publier articles Blog"
+    usecase manageUser as "Gérer Utilisateurs"
+    usecase manageSports as "Gérer Matchs"
+    usecase manageClubs as "Gérer Clubs"
 
+    ' actors relations
     user -- (consultMatches)
     user -- (searchBlog)
     user -- (commentBlog)
     user -- (consultClassement)
+
+    (manageUser) -- admin
+    (manageSports) -- sportMaster
+    (manageClubs) -- sportMaster
+    (editBlog) -- editor
+    (publishBlog) -- supervisor
+
+    (publishBlog) .> (editBlog) : <<include>>
+
+    supervisor <|- admin
+    admin -|> sportMaster
 
 }
 

@@ -1,0 +1,174 @@
+@startuml
+'hide footbox
+'projectscale monthly
+'header some header
+'footer some footer
+'caption This is caption
+
+title Gantt LeDjassa
+
+sunday are closed
+legend
+    Diagramme de Gantt Projet LeDjassa
+end legend
+
+scale 1
+
+!define DARKBLUE
+!include styles.puml
+
+' Tasks Definition
+-- Préparation --
+'[Echange Technos] as [E] lasts 1 days
+[Business Plan] as [BP] lasts 1 weeks
+note bottom
+Contenu :
+    - Les points financiers
+    - La rentabilité
+    - La comptabilité
+    - L'équipe nécessaire
+        '- Marketeurs
+        '- Développeurs
+        '- Financiers
+        '- Juridique
+        '- Manager
+    - Le matériel nécessaire
+end note
+
+[Cahier des charges FontEnd] as [CCDz] lasts 3 days
+note bottom
+Contenu :
+    - Les différentes pages de l'app
+    - Les choses à ajouter/retirer/modifier
+    - Détail de chaque page
+    - Fonctionnement de chaque page
+end note
+
+[Cahier des charges Back-End] as [CCBack] lasts 3 days
+note bottom
+Contenu :
+    - Les différents packages de l'app
+        '- User Auth
+        '- Negociation
+        '- Admin
+        '- Ecommerce
+    - La procédure de travail
+        '- Structuration du projet
+        '- TDD
+        '- TDD
+        '- GitHub Actions ?
+    - Le lien du dépôt Git
+    - La procédure de Mise en ligne
+    - Technos à utiliser
+end note
+
+[Recrutement team] as [RH] lasts 1 weeks
+
+-- Dev --
+[Configuration Initiale] as [Git] lasts 1 weeks
+note bottom
+Contenu:
+    - Création du projet + Architecture
+    - Déployement sur Github
+    - Déployement sur le serveur
+    - Achat du nom de domaine
+end note
+
+[Package Auth] as [Auth] lasts 13 days
+[Gestion Comptes] as [Account] lasts 7 days
+[Gestion portefeuille] as [Wallet] lasts 6 days
+note bottom
+Il s'agit du portefeuille
+virtuel
+end note
+
+[Package Ecommerce] as [Ecommerce] lasts 12 weeks
+[Gestion Notifications] as [Notice] lasts 2 weeks
+[Gestion Boutiques] as [Store] lasts 2 weeks
+' Use Django Events/Symfony Events
+
+[Recherche Produits] as [Search] lasts 2 weeks
+[Gestion Commandes] as [Checkout] lasts 3 weeks
+[Gestion Livraison] as [Shipping] lasts 1 weeks
+[Gestion Favoris] as [Wishlist] lasts 1 weeks
+[Gestion Réclammations] as [Alert] lasts 2 weeks
+
+
+[Gestion des Negociations] as [Chat] lasts 4 weeks
+
+-- Design --
+[Page d'accueil] as [Home] lasts 1 weeks
+[Page de profil user] as [Profile] lasts 1 weeks
+[Page admin] as [Dash] lasts 1 weeks
+[Pages Ecommerce] as [DEcommerce] lasts 11 weeks
+[Pages Chat] as [DChat] lasts 3 weeks
+
+-- Deploy --
+[1er Déployement] as [Deploy1] lasts 1 weeks
+
+note bottom
+A chaque déploiment,
+il s'en suit une phase de Test
+end note
+
+[2e Déployement] as [Deploy2] lasts  1 weeks
+[3e Déployement] as [Deploy3] lasts  1 weeks
+[4e Déployement] as [Deploy4] lasts  1 weeks
+[Déployement Final] as [DeployFinal] lasts  1 weeks
+
+note bottom
+Le déploiment final consiste en :
+    - Une série de tests,
+    - De réfactoring du code
+    - De Correction des bugs
+end note
+
+'-- Communication --
+'-- Finance et Business Plan --
+
+
+
+' Tasks TimeLine
+Project starts 2021-01-03
+
+' Preparation
+'[E] starts 2020-12-27
+[BP] starts 2021-01-03
+'[BP] starts at [E]'s end
+[CCDz] starts at [BP]'s end
+[CCBack] starts at [BP]'s end
+[Git] starts at [CCBack]'s end
+[RH] starts at [Git]'s end
+
+' Dev
+[Auth] starts at [RH]'s end
+[Account] starts at [RH]'s end
+[Wallet] starts at [Account]'s end
+
+[Ecommerce] starts at [Auth]'s end
+[Notice] starts at [Auth]'s end
+[Store] starts at [Notice]'s end
+[Search] starts at [Store]'s end
+[Checkout] starts at [Search]'s end
+[Shipping] starts at [Checkout]'s end
+[Wishlist] starts at [Shipping]'s end
+
+[Alert] starts at [Wishlist]'s end
+
+[Chat] starts at [Ecommerce]'s end
+
+' Design
+[Home] starts at [RH]'s end
+[Profile] starts at [Home]'s end
+[Dash] starts at [Profile]'s end
+[DEcommerce] starts at [Dash]'s end
+[DChat] starts at [DEcommerce]'s end
+
+' Deploy
+[Deploy1] starts at [Auth]'s end
+[Deploy2] starts at [Checkout]'s end
+[Deploy3] starts at [Ecommerce]'s end
+[Deploy4] starts at [Chat]'s end
+[DeployFinal] starts at [Deploy4]'s end
+
+@enduml
