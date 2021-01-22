@@ -8,7 +8,7 @@ Il s'agit d'un site de magazine sportif.
 - avoir `php >= 7.2` installé
 - avoir `MySQL >= 5.0` installé
 
-###Comment lancer le projet
+### Comment lancer le projet
 
 Pour lancer l'application il faut : 
 
