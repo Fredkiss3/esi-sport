@@ -26,6 +26,8 @@ Modifier le fichier `.env` pour correspondre à votre base de données
 DATABASE_URL="mysql://{utitisateur}:{mot_de_passe}@127.0.0.1:3306/{base_de_données}"
 ```
 
+Installer la Base de données
+
 ```bash
 php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
