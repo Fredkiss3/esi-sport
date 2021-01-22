@@ -1,0 +1,524 @@
+{% extends 'base.html.twig' %}
+
+{% set active = "blog" %}
+
+
+{% block title %}
+    Détail de l'article
+{% endblock %}
+
+{% set csrf = form_widget(formView._token) %}
+
+{% block content %}
+    <!--// Main Content \\-->
+    <div class="sportsmagazine-main-content sportsmagazine-main-contentminus">
+
+        <!--// Main Section \\-->
+        <div class="sportsmagazine-main-section sportsmagazine-thumb">
+            <span class="thumb-transparent"></span>
+            <div class="sportsmagazine-thumb-text">
+
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <h1>{{ article.title }}</h1>
+                            <ul class="sportsmagazine-thumb-option">
+                                <li><i class="fa fa-calendar-o"></i> {{ article.formatedDate }}</li>
+                                {# <li><a href="404.html"><i class="fa fa-thumbs-o-up"></i> 213</a></li> #}
+                                <li><i class="fa fa-comments-o"></i>{{ article.comments|length }}</li>
+                                {# <li><i class="fa fa-user"></i> David Jordan</li> #}
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--// Main Section \\-->
+
+        <!--// Main Section \\-->
+        <div class="sportsmagazine-main-section">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-9">
+                        <div class="sportsmagazine-rich-editor">
+                            <article style="line-height: 26px">
+                                {{ article.content|raw }}
+                            </article>
+                            <div class="sportsmagazine-post-tags">
+                                <div class="sportsmagazine-tags">
+                                    {% for tag in article.tags %}
+                                        <a href="{{ path('blog.tag', {tag: tag.tag}) }}">#{{ tag.tag }}</a>
+                                    {% endfor %}
+                                </div>
+                                <div class="sportsmagazine-blog-social">
+                                    <ul>
+                                        <li><a href="https://www.facebook.com/" class="color-one"><i
+                                                        class="fa fa-facebook"></i>facebook</a></li>
+                                        <li><a href="https://twitter.com/login" class="color-two"><i
+                                                        class="fa fa-twitter"></i>Twitter</a></li>
+                                        <li><a href="https://plus.google.com/" class="color-three"><i
+                                                        class="fa fa-google-plus"></i>Google+</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {# <div class="sportsmagazine-prenxt-post"> #}
+                        {# <ul> #}
+                        {# <li> #}
+                        {# <div class="sportsmagazine-prev-post"> #}
+                        {# <figure><a href="404.html"><img src="extra-images/post-img1.jpg" alt=""></a> #}
+                        {# </figure> #}
+                        {# <div class="sportsmagazine-prev-artical"> #}
+                        {# <h3><a href="404.html">The team is starting a new power breakfast #}
+                        {# regimen</a></h3> #}
+                        {# <a href="404.html" class="sportsmagazine-post-arrow"><i #}
+                        {# class="fa fa-angle-double-left"></i> Previous Post</a> #}
+                        {# </div> #}
+                        {# </div> #}
+                        {# </li> #}
+                        {# <li> #}
+                        {# <div class="sportsmagazine-next-post"> #}
+                        {# <figure><a href="404.html"><img src="extra-images/post-img2.jpg" alt=""></a> #}
+                        {# </figure> #}
+                        {# <div class="sportsmagazine-next-artical"> #}
+                        {# <h3><a href="404.html">The team is starting a new power breakfast #}
+                        {# regimen</a></h3> #}
+                        {# <a href="404.html" class="sportsmagazine-post-arrow">Next Post <i #}
+                        {# class="fa fa-angle-double-right"></i></a> #}
+                        {# </div> #}
+                        {# </div> #}
+                        {# </li> #}
+                        {# </ul> #}
+                        {# </div> #}
+                        {# #}
+                        <div class="sportsmagazine-section-heading"><h2>Articles liés</h2></div>
+                        <div class="sportsmagazine-related-article sportsmagazine-blog-artical">
+                            <ul class="row">
+                                {% for article in related %}
+                                    <li class="col-md-4">
+                                        <figure><a href="{{ path('blog.detail', {slug:article.slug}) }}"><img
+                                                        src="{{ vich_uploader_asset(article, 'imageFile')  }}"
+                                                        alt=""><i
+                                                        class="fa fa-link"></i></a></figure>
+                                        <div class="sportsmagazine-article-text">
+                                            <time datetime="{{ article.publishedAt.format("Y-m-d H:m") }}">{{ article.formatedDate }}</time>
+                                            <h5>
+                                                <a href="{{ path('blog.detail', {slug:article.slug}) }}">{{ article.title }}</a>
+                                            </h5>
+                                        </div>
+                                        {# <ul class="sportsmagazine-article-options"> #}
+                                        {# <li><a href="404.html"><i class="fa fa-comment-o"></i></a></li> #}
+                                        {# #}{# <li><a href="404.html"><i class="fa fa-eye"></i> 840</a></li> #}
+                                        {# #}{# <li><a href="404.html"><i class="fa fa-share-alt"></i> 89</a></li> #}
+                                        {# </ul> #}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="comments-area">
+                            <!--// coments \\-->
+                            <div class="sportsmagazine-section-heading"><h2>Commentaires</h2></div>
+
+                            <ul class="comment-list">
+                                {% for comment in comments %}
+                                    <li>
+                                        <div class="thumb-list">
+                                            <figure><img alt="" src="{{ asset('extra-images/comment-img2.jpg') }}">
+                                            </figure>
+                                            <div class="text-holder">
+                                                <h6>{{ comment.author }}</h6>
+                                                <time class="post-date" datetime="2008-02-14 20:00">
+                                                    {% if "now"|date("Y") == comment.createdAt.format("d") %}
+                                                        écrit à {{ comment.createdAt.format("H:m") }}
+                                                    {% else %}
+                                                        écrit le {{ comment.formatedDate }}
+                                                    {% endif %}</time>
+                                                <a class="comment-reply-link"
+                                                   data-toggle="collapse" href="#reply-{{ comment.id }}"
+                                                   role="button"
+                                                   aria-expanded="false"
+                                                   aria-controls="multiCollapseExample1"
+                                                >Répondre</a>
+                                            </div>
+                                            <p>{{ comment.content }}</p>
+                                        </div>
+                                        <div class="comment-respond sportsmagazine-contact-form">
+                                            <form class="collapse multi-collapse"
+                                                  id="reply-{{ comment.id }}"
+                                                  method="POST"
+                                                  action="{{ path('comment.make', {slug: article.slug}) }}">
+                                                <ul>
+                                                    {{ csrf|raw }}
+
+                                                    <li style="">
+                                                        <label>Votre nom:</label>
+                                                        <p>
+                                                            <input type="hidden" name="comment_form[article]"
+                                                                   value="{{ article.id }}">
+                                                            <input type="hidden" name="comment_form[parent]"
+                                                                   value="{{ comment.id }}">
+                                                            <input value="Type here"
+                                                                   name="comment_form[author]"
+                                                                   onblur="if(this.value == '') { this.value ='Type here'; }"
+                                                                   onfocus="if(this.value =='Type here') { this.value = ''; }"
+                                                                   type="text"
+                                                                   required="required">
+                                                            <span><i class="fa fa-user"></i></span>
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <label>Email:</label>
+                                                        <p>
+                                                            <input value="Type here"
+                                                                   onblur="if(this.value == '') { this.value ='Type here'; }"
+                                                                   onfocus="if(this.value =='Type here') { this.value = ''; }"
+                                                                   type="text">
+                                                            <span><i class="fa fa-envelope"></i></span>
+                                                        </p>
+                                                    </li>
+                                                    <li class="full-input">
+                                                        <label>Votre Commentaire:</label>
+                                                        <p>
+                                                <textarea required="required" name="comment_form[content]"
+                                                          placeholder="Type here"></textarea>
+                                                            <span><i class="fa fa-comment"></i></span>
+                                                        </p>
+
+                                                    </li>
+                                                    <li>
+                                                        <p><label><input value="Répondre" type="submit"></label></p>
+                                                    </li>
+                                                </ul>
+                                            </form>
+                                        </div>
+
+                                        {% if comment.replies|length > 0 %}
+                                            <!-- .children -->
+                                            <ul class="children">
+                                                {% for reply in comment.replies %}
+                                                    <!-- #comment-## -->
+                                                    <li>
+                                                        <div class="thumb-list">
+                                                            <figure><img alt=""
+                                                                         src="{{ asset('extra-images/comment-img2.jpg') }}">
+                                                            </figure>
+                                                            <div class="text-holder">
+                                                                <h6>{{ reply.author }}</h6>
+                                                                <time class="post-date" datetime="2008-02-14 20:00">
+                                                                    {% if "now"|date("Y") == reply.createdAt.format("d") %}
+                                                                        écrit à {{ reply.createdAt.format("H:m") }}
+                                                                    {% else %}
+                                                                        écrit le {{ reply.formatedDate }}
+                                                                    {% endif %}</time>
+                                                            </div>
+                                                            <p>{{ reply.content }}</p>
+                                                        </div>
+
+
+                                                    </li>
+                                                    <!-- #comment-## -->
+
+                                                {% endfor %}
+
+                                            </ul>
+                                        {% endif %}
+                                        <!-- .children -->
+                                    </li>
+                                {% else %}
+                                    <h3 style="margin-bottom: 2rem">Aucun Commentaire pour l'instant</h3>
+                                {% endfor %}
+                            </ul>
+
+                            <!--// coments \\-->
+
+                            <!--// comment-respond \\-->
+                            <div class="comment-respond sportsmagazine-contact-form">
+                                <div class="sportsmagazine-section-heading"><h2>Ecrire un commentaire</h2></div>
+                                <form method="POST" action="{{ path('comment.make', {slug: article.slug}) }}">
+                                    {# <input type="hidden" name="_token" value="{{ csrf_token('comment') }}"/> #}
+                                    {{ csrf|raw }}
+                                    <ul>
+                                        <li style="">
+                                            <label>Votre nom:</label>
+                                            <p>
+                                                <input type="hidden" name="comment_form[article]"
+                                                       value="{{ article.id }}">
+                                                <input value="Type here"
+                                                       name="comment_form[author]"
+                                                       onblur="if(this.value == '') { this.value ='Type here'; }"
+                                                       onfocus="if(this.value =='Type here') { this.value = ''; }"
+                                                       type="text"
+                                                       required="required">
+                                                <span><i class="fa fa-user"></i></span>
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <label>Email:</label>
+                                            <p>
+                                                <input value="Type here"
+                                                       onblur="if(this.value == '') { this.value ='Type here'; }"
+                                                       onfocus="if(this.value =='Type here') { this.value = ''; }"
+                                                       type="text">
+                                                <span><i class="fa fa-envelope"></i></span>
+                                            </p>
+                                        </li>
+                                        <li class="full-input">
+                                            <label>Votre Commentaire:</label>
+                                            <p>
+                                                <textarea required="required" name="comment_form[content]"
+                                                          placeholder="Type here"></textarea>
+                                                <span><i class="fa fa-comment"></i></span>
+                                            </p>
+
+                                        </li>
+                                        <li>
+                                            <p><label><input value="Soumettre" type="submit"></label></p>
+                                        </li>
+                                    </ul>
+                                </form>
+                            </div>
+                            <!--// comment-respond \\-->
+                        </div>
+
+                    </div>
+
+                    {# <!--// SideBar \\--> #}
+                    {# <aside class="col-md-3"> #}
+
+                    {# #}{# <!--// Widget Popular Post \\--> #}
+                    {# #}{# <div class="sportsmagazine-widget-heading"> #}
+                    {# #}{# <h2>Poste Populaire</h2> #}
+                    {# #}{# </div> #}
+                    {# #}{# <div class="widget widget_popular_post"> #}
+                    {# #}{# <ul> #}
+                    {# #}{# <li> #}
+                    {# #}{# <div class="sportsmagazine-popular-post"> #}
+                    {# #}{# <figure><a href="blog-detail.html"><img #}
+                    {# #}{# src="extra-images/widget-popular-post1.jpg" alt=""></a> #}
+                    {# #}{# </figure> #}
+                    {# #}{# <div class="sportsmagazine-popular-post-text"> #}
+                    {# #}{# <h5><a href="blog-detail.html">Mark Johnson has as acture and is gona</a> #}
+                    {# #}{# </h5> #}
+                    {# #}{# <time datetime="2008-02-14 20:00">August 23rd, 2016</time> #}
+                    {# #}{# </div> #}
+                    {# #}{# <span></span> #}
+                    {# #}{# </div> #}
+                    {# #}{# </li> #}
+                    {# #}{# <li> #}
+                    {# #}{# <div class="sportsmagazine-popular-post"> #}
+                    {# #}{# <figure><a href="blog-detail.html"><img #}
+                    {# #}{# src="extra-images/widget-popular-post2.jpg" alt=""></a> #}
+                    {# #}{# </figure> #}
+                    {# #}{# <div class="sportsmagazine-popular-post-text"> #}
+                    {# #}{# <h5><a href="blog-detail.html">Mark Johnson has as acture and is gona</a> #}
+                    {# #}{# </h5> #}
+                    {# #}{# <time datetime="2008-02-14 20:00">August 23rd, 2016</time> #}
+                    {# #}{# </div> #}
+                    {# #}{# <span></span> #}
+                    {# #}{# </div> #}
+                    {# #}{# </li> #}
+                    {# #}{# <li> #}
+                    {# #}{# <div class="sportsmagazine-popular-post"> #}
+                    {# #}{# <figure><a href="blog-detail.html"><img #}
+                    {# #}{# src="extra-images/widget-popular-post3.jpg" alt=""></a> #}
+                    {# #}{# </figure> #}
+                    {# #}{# <div class="sportsmagazine-popular-post-text"> #}
+                    {# #}{# <h5><a href="blog-detail.html">Mark Johnson has as acture and is gona</a> #}
+                    {# #}{# </h5> #}
+                    {# #}{# <time datetime="2008-02-14 20:00">August 23rd, 2016</time> #}
+                    {# #}{# </div> #}
+                    {# #}{# <span></span> #}
+                    {# #}{# </div> #}
+                    {# #}{# </li> #}
+                    {# #}{# <li> #}
+                    {# #}{# <div class="sportsmagazine-popular-post"> #}
+                    {# #}{# <figure><a href="blog-detail.html"><img #}
+                    {# #}{# src="extra-images/widget-popular-post4.jpg" alt=""></a> #}
+                    {# #}{# </figure> #}
+                    {# #}{# <div class="sportsmagazine-popular-post-text"> #}
+                    {# #}{# <h5><a href="blog-detail.html">Mark Johnson has as acture and is gona</a> #}
+                    {# #}{# </h5> #}
+                    {# #}{# <time datetime="2008-02-14 20:00">August 23rd, 2016</time> #}
+                    {# #}{# </div> #}
+                    {# #}{# <span></span> #}
+                    {# #}{# </div> #}
+                    {# #}{# </li> #}
+                    {# #}{# </ul> #}
+                    {# #}{# </div> #}
+                    {# #}{# <!--// Widget Popular Post \\--> #}
+
+                    {# <!--// Widget Cetagories \\--> #}
+                    {# <div class="sportsmagazine-widget-heading"> #}
+                    {# <h2>Mot-clés</h2> #}
+                    {# </div> #}
+                    {# <div class="widget widget_cetagories"> #}
+                    {# <ul> #}
+                    {# {% for tag in tags %} #}
+                    {# <li><a href="{{ path('blog.tag', {tag: tag.tag}) }}">{{ tag.tag }} #}
+                    {# <span>( {{ tag.articles|length }} )</span></a></li> #}
+                    {# {% endfor %} #}
+                    {# </ul> #}
+                    {# </div> #}
+                    {# <!--// Widget Cetagories \\--> #}
+
+                    {# #}{# <!--// Widget Upcoming Matches \\--> #}
+                    {# #}{# <div class="sportsmagazine-widget-heading"> #}
+                    {# #}{# <h2>Matchs a venir</h2> #}
+                    {# #}{# </div> #}
+                    {# #}{# <div class="widget widget_matches"> #}
+                    {# #}{# <ul> #}
+                    {# #}{# <li> #}
+                    {# #}{# <div class="sportsmagazine-team-one"> #}
+                    {# #}{# <h6><a href="#">TheLions</a></h6> #}
+                    {# #}{# <span>Esi-Basketball</span> #}
+                    {# #}{# </div> #}
+                    {# #}{# <span>VS</span> #}
+                    {# #}{# <div class="sportsmagazine-team-two"> #}
+                    {# #}{# <h6><a href="#">Phoenix</a></h6> #}
+                    {# #}{# <span>ESMG Basketball</span> #}
+                    {# #}{# </div> #}
+                    {# #}{# </li> #}
+                    {# #}{# <li> #}
+                    {# #}{# <div class="sportsmagazine-team-one"> #}
+                    {# #}{# <h6><a href="#">TheLions</a></h6> #}
+                    {# #}{# <span>Esi-Basketball</span> #}
+                    {# #}{# </div> #}
+                    {# #}{# <span>VS</span> #}
+                    {# #}{# <div class="sportsmagazine-team-two"> #}
+                    {# #}{# <h6><a href="#">Phoenix</a></h6> #}
+                    {# #}{# <span>ESMG Basketball</span> #}
+                    {# #}{# </div> #}
+                    {# #}{# </li> #}
+                    {# #}{# <li> #}
+                    {# #}{# <div class="sportsmagazine-team-one"> #}
+                    {# #}{# <h6><a href="#">TheLions</a></h6> #}
+                    {# #}{# <span>Esi-Basketball</span> #}
+                    {# #}{# </div> #}
+                    {# #}{# <span>VS</span> #}
+                    {# #}{# <div class="sportsmagazine-team-two"> #}
+                    {# #}{# <h6><a href="#">Phoenix</a></h6> #}
+                    {# #}{# <span>ESMG Basketball</span> #}
+                    {# #}{# </div> #}
+                    {# #}{# </li> #}
+                    {# #}{# <li> #}
+                    {# #}{# <div class="sportsmagazine-team-one"> #}
+                    {# #}{# <h6><a href="#">TheLions</a></h6> #}
+                    {# #}{# <span>Esi-Basketball</span> #}
+                    {# #}{# </div> #}
+                    {# #}{# <span>VS</span> #}
+                    {# #}{# <div class="sportsmagazine-team-two"> #}
+                    {# #}{# <h6><a href="#">Phoenix</a></h6> #}
+                    {# #}{# <span>ESMG Basketball</span> #}
+                    {# #}{# </div> #}
+                    {# #}{# </li> #}
+                    {# #}{# <li> #}
+                    {# #}{# <div class="sportsmagazine-team-one"> #}
+                    {# #}{# <h6><a href="#">TheLions</a></h6> #}
+                    {# #}{# <span>Esi-Basketball</span> #}
+                    {# #}{# </div> #}
+                    {# #}{# <span>VS</span> #}
+                    {# #}{# <div class="sportsmagazine-team-two"> #}
+                    {# #}{# <h6><a href="#">Phoenix</a></h6> #}
+                    {# #}{# <span>ESMG Basketball</span> #}
+                    {# #}{# </div> #}
+                    {# #}{# </li> #}
+                    {# #}{# <li> #}
+                    {# #}{# <div class="sportsmagazine-team-one"> #}
+                    {# #}{# <h6><a href="#">TheLions</a></h6> #}
+                    {# #}{# <span>Esi-Basketball</span> #}
+                    {# #}{# </div> #}
+                    {# #}{# <span>VS</span> #}
+                    {# #}{# <div class="sportsmagazine-team-two"> #}
+                    {# #}{# <h6><a href="#">Phoenix</a></h6> #}
+                    {# #}{# <span>ESMG Basketball</span> #}
+                    {# #}{# </div> #}
+                    {# #}{# </li> #}
+                    {# #}{# <li> #}
+                    {# #}{# <div class="sportsmagazine-team-one"> #}
+                    {# #}{# <h6><a href="#">TheLions</a></h6> #}
+                    {# #}{# <span>Esi-Basketball</span> #}
+                    {# #}{# </div> #}
+                    {# #}{# <span>VS</span> #}
+                    {# #}{# <div class="sportsmagazine-team-two"> #}
+                    {# #}{# <h6><a href="#">Phoenix</a></h6> #}
+                    {# #}{# <span>ESMG Basketball</span> #}
+                    {# #}{# </div> #}
+                    {# #}{# </li> #}
+                    {# #}{# <li> #}
+                    {# #}{# <div class="sportsmagazine-team-one"> #}
+                    {# #}{# <h6><a href="#">TheLions</a></h6> #}
+                    {# #}{# <span>Esi-Basketball</span> #}
+                    {# #}{# </div> #}
+                    {# #}{# <span>VS</span> #}
+                    {# #}{# <div class="sportsmagazine-team-two"> #}
+                    {# #}{# <h6><a href="#">Phoenix</a></h6> #}
+                    {# #}{# <span>ESMG Basketball</span> #}
+                    {# #}{# </div> #}
+                    {# #}{# </li> #}
+
+                    {# #}{# </ul> #}
+                    {# #}{# </div> #}
+                    {# #}{# <!--// Widget Upcoming Matches \\--> #}
+
+                    {# #}{# <!--// Widget Flicker Images \\--> #}
+                    {# #}{# <div class="sportsmagazine-widget-heading"> #}
+                    {# #}{# <h2>Flicker Images</h2> #}
+                    {# #}{# </div> #}
+                    {# #}{# <div class="widget widget_gallery"> #}
+                    {# #}{# <ul> #}
+                    {# #}{# <li><a data-fancybox-group="group" href="extra-images/flicker-image-1.jpg" #}
+                    {# #}{# class="fancybox"><img #}
+                    {# #}{# src="extra-images/flicker-image-1.jpg" alt=""><i #}
+                    {# #}{# class="fa fa-angle-double-right"></i></a></li> #}
+                    {# #}{# <li><a data-fancybox-group="group" href="extra-images/flicker-image-2.jpg" #}
+                    {# #}{# class="fancybox"><img #}
+                    {# #}{# src="extra-images/flicker-image-2.jpg" alt=""><i #}
+                    {# #}{# class="fa fa-angle-double-right"></i></a></li> #}
+                    {# #}{# <li><a data-fancybox-group="group" href="extra-images/flicker-image-3.jpg" #}
+                    {# #}{# class="fancybox"><img #}
+                    {# #}{# src="extra-images/flicker-image-3.jpg" alt=""><i #}
+                    {# #}{# class="fa fa-angle-double-right"></i></a></li> #}
+                    {# #}{# <li><a data-fancybox-group="group" href="extra-images/flicker-image-4.jpg" #}
+                    {# #}{# class="fancybox"><img #}
+                    {# #}{# src="extra-images/flicker-image-4.jpg" alt=""><i #}
+                    {# #}{# class="fa fa-angle-double-right"></i></a></li> #}
+                    {# #}{# <li><a data-fancybox-group="group" href="extra-images/flicker-image-5.jpg" #}
+                    {# #}{# class="fancybox"><img #}
+                    {# #}{# src="extra-images/flicker-image-5.jpg" alt=""><i #}
+                    {# #}{# class="fa fa-angle-double-right"></i></a></li> #}
+                    {# #}{# <li><a data-fancybox-group="group" href="extra-images/flicker-image-6.jpg" #}
+                    {# #}{# class="fancybox"><img #}
+                    {# #}{# src="extra-images/flicker-image-6.jpg" alt=""><i #}
+                    {# #}{# class="fa fa-angle-double-right"></i></a></li> #}
+                    {# #}{# <li><a data-fancybox-group="group" href="extra-images/flicker-image-7.jpg" #}
+                    {# #}{# class="fancybox"><img #}
+                    {# #}{# src="extra-images/flicker-image-7.jpg" alt=""><i #}
+                    {# #}{# class="fa fa-angle-double-right"></i></a></li> #}
+                    {# #}{# <li><a data-fancybox-group="group" href="extra-images/flicker-image-8.jpg" #}
+                    {# #}{# class="fancybox"><img #}
+                    {# #}{# src="extra-images/flicker-image-8.jpg" alt=""><i #}
+                    {# #}{# class="fa fa-angle-double-right"></i></a></li> #}
+                    {# #}{# <li><a data-fancybox-group="group" href="extra-images/flicker-image-9.jpg" #}
+                    {# #}{# class="fancybox"><img #}
+                    {# #}{# src="extra-images/flicker-image-9.jpg" alt=""><i #}
+                    {# #}{# class="fa fa-angle-double-right"></i></a></li> #}
+                    {# #}{# </ul> #}
+                    {# #}{# </div> #}
+                    {# #}{# <!--// Widget Flicker Images \\--> #}
+
+                    {# </aside> #}
+                    {# <!--// SideBar \\--> #}
+                    {% include "blog/_partials/_tag_sidebar.html.twig" %}
+
+                </div>
+            </div>
+        </div>
+        <!--// Main Section \\-->
+
+    </div>
+    <!--// Main Content \\-->
+{% endblock %}
+

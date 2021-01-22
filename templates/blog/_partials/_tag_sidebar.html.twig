@@ -1,0 +1,228 @@
+
+<!--// SideBar \\-->
+<aside class="col-md-3">
+
+    {# <!--// Widget Popular Post \\--> #}
+    {# <div class="sportsmagazine-widget-heading"> #}
+    {# <h2>Poste Populaire</h2> #}
+    {# </div> #}
+    {# <div class="widget widget_popular_post"> #}
+    {# <ul> #}
+    {# <li> #}
+    {# <div class="sportsmagazine-popular-post"> #}
+    {# <figure><a href="blog-detail.html"><img #}
+    {# src="extra-images/widget-popular-post1.jpg" alt=""></a> #}
+    {# </figure> #}
+    {# <div class="sportsmagazine-popular-post-text"> #}
+    {# <h5><a href="blog-detail.html">Mark Johnson has as acture and is gona</a> #}
+    {# </h5> #}
+    {# <time datetime="2008-02-14 20:00">August 23rd, 2016</time> #}
+    {# </div> #}
+    {# <span></span> #}
+    {# </div> #}
+    {# </li> #}
+    {# <li> #}
+    {# <div class="sportsmagazine-popular-post"> #}
+    {# <figure><a href="blog-detail.html"><img #}
+    {# src="extra-images/widget-popular-post2.jpg" alt=""></a> #}
+    {# </figure> #}
+    {# <div class="sportsmagazine-popular-post-text"> #}
+    {# <h5><a href="blog-detail.html">Mark Johnson has as acture and is gona</a> #}
+    {# </h5> #}
+    {# <time datetime="2008-02-14 20:00">August 23rd, 2016</time> #}
+    {# </div> #}
+    {# <span></span> #}
+    {# </div> #}
+    {# </li> #}
+    {# <li> #}
+    {# <div class="sportsmagazine-popular-post"> #}
+    {# <figure><a href="blog-detail.html"><img #}
+    {# src="extra-images/widget-popular-post3.jpg" alt=""></a> #}
+    {# </figure> #}
+    {# <div class="sportsmagazine-popular-post-text"> #}
+    {# <h5><a href="blog-detail.html">Mark Johnson has as acture and is gona</a> #}
+    {# </h5> #}
+    {# <time datetime="2008-02-14 20:00">August 23rd, 2016</time> #}
+    {# </div> #}
+    {# <span></span> #}
+    {# </div> #}
+    {# </li> #}
+    {# <li> #}
+    {# <div class="sportsmagazine-popular-post"> #}
+    {# <figure><a href="blog-detail.html"><img #}
+    {# src="extra-images/widget-popular-post4.jpg" alt=""></a> #}
+    {# </figure> #}
+    {# <div class="sportsmagazine-popular-post-text"> #}
+    {# <h5><a href="blog-detail.html">Mark Johnson has as acture and is gona</a> #}
+    {# </h5> #}
+    {# <time datetime="2008-02-14 20:00">August 23rd, 2016</time> #}
+    {# </div> #}
+    {# <span></span> #}
+    {# </div> #}
+    {# </li> #}
+    {# </ul> #}
+    {# </div> #}
+    {# <!--// Widget Popular Post \\--> #}
+
+    <!--// Widget Cetagories \\-->
+    <div class="sportsmagazine-widget-heading">
+        <h2>Mot-clés</h2>
+    </div>
+    <div class="widget widget_cetagories">
+        <ul>
+            {% for tag_article in tags %}
+                {% set tag = tag_article[0] %}
+                <li><a href="{{ path('blog.tag', {tag: tag.tag}) }}">{{ tag.tag }}
+                        <span>( {{ tag_article[1] }} )</span></a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <!--// Widget Cetagories \\-->
+
+    {# <!--// Widget Upcoming Matches \\--> #}
+    {# <div class="sportsmagazine-widget-heading"> #}
+    {# <h2>Matchs a venir</h2> #}
+    {# </div> #}
+    {# <div class="widget widget_matches"> #}
+    {# <ul> #}
+    {# <li> #}
+    {# <div class="sportsmagazine-team-one"> #}
+    {# <h6><a href="#">TheLions</a></h6> #}
+    {# <span>Esi-Basketball</span> #}
+    {# </div> #}
+    {# <span>VS</span> #}
+    {# <div class="sportsmagazine-team-two"> #}
+    {# <h6><a href="#">Phoenix</a></h6> #}
+    {# <span>ESMG Basketball</span> #}
+    {# </div> #}
+    {# </li> #}
+    {# <li> #}
+    {# <div class="sportsmagazine-team-one"> #}
+    {# <h6><a href="#">TheLions</a></h6> #}
+    {# <span>Esi-Basketball</span> #}
+    {# </div> #}
+    {# <span>VS</span> #}
+    {# <div class="sportsmagazine-team-two"> #}
+    {# <h6><a href="#">Phoenix</a></h6> #}
+    {# <span>ESMG Basketball</span> #}
+    {# </div> #}
+    {# </li> #}
+    {# <li> #}
+    {# <div class="sportsmagazine-team-one"> #}
+    {# <h6><a href="#">TheLions</a></h6> #}
+    {# <span>Esi-Basketball</span> #}
+    {# </div> #}
+    {# <span>VS</span> #}
+    {# <div class="sportsmagazine-team-two"> #}
+    {# <h6><a href="#">Phoenix</a></h6> #}
+    {# <span>ESMG Basketball</span> #}
+    {# </div> #}
+    {# </li> #}
+    {# <li> #}
+    {# <div class="sportsmagazine-team-one"> #}
+    {# <h6><a href="#">TheLions</a></h6> #}
+    {# <span>Esi-Basketball</span> #}
+    {# </div> #}
+    {# <span>VS</span> #}
+    {# <div class="sportsmagazine-team-two"> #}
+    {# <h6><a href="#">Phoenix</a></h6> #}
+    {# <span>ESMG Basketball</span> #}
+    {# </div> #}
+    {# </li> #}
+    {# <li> #}
+    {# <div class="sportsmagazine-team-one"> #}
+    {# <h6><a href="#">TheLions</a></h6> #}
+    {# <span>Esi-Basketball</span> #}
+    {# </div> #}
+    {# <span>VS</span> #}
+    {# <div class="sportsmagazine-team-two"> #}
+    {# <h6><a href="#">Phoenix</a></h6> #}
+    {# <span>ESMG Basketball</span> #}
+    {# </div> #}
+    {# </li> #}
+    {# <li> #}
+    {# <div class="sportsmagazine-team-one"> #}
+    {# <h6><a href="#">TheLions</a></h6> #}
+    {# <span>Esi-Basketball</span> #}
+    {# </div> #}
+    {# <span>VS</span> #}
+    {# <div class="sportsmagazine-team-two"> #}
+    {# <h6><a href="#">Phoenix</a></h6> #}
+    {# <span>ESMG Basketball</span> #}
+    {# </div> #}
+    {# </li> #}
+    {# <li> #}
+    {# <div class="sportsmagazine-team-one"> #}
+    {# <h6><a href="#">TheLions</a></h6> #}
+    {# <span>Esi-Basketball</span> #}
+    {# </div> #}
+    {# <span>VS</span> #}
+    {# <div class="sportsmagazine-team-two"> #}
+    {# <h6><a href="#">Phoenix</a></h6> #}
+    {# <span>ESMG Basketball</span> #}
+    {# </div> #}
+    {# </li> #}
+    {# <li> #}
+    {# <div class="sportsmagazine-team-one"> #}
+    {# <h6><a href="#">TheLions</a></h6> #}
+    {# <span>Esi-Basketball</span> #}
+    {# </div> #}
+    {# <span>VS</span> #}
+    {# <div class="sportsmagazine-team-two"> #}
+    {# <h6><a href="#">Phoenix</a></h6> #}
+    {# <span>ESMG Basketball</span> #}
+    {# </div> #}
+    {# </li> #}
+
+    {# </ul> #}
+    {# </div> #}
+    {# <!--// Widget Upcoming Matches \\--> #}
+
+    {# <!--// Widget Flicker Images \\--> #}
+    {# <div class="sportsmagazine-widget-heading"> #}
+    {# <h2>Flicker Images</h2> #}
+    {# </div> #}
+    {# <div class="widget widget_gallery"> #}
+    {# <ul> #}
+    {# <li><a data-fancybox-group="group" href="extra-images/flicker-image-1.jpg" #}
+    {# class="fancybox"><img #}
+    {# src="extra-images/flicker-image-1.jpg" alt=""><i #}
+    {# class="fa fa-angle-double-right"></i></a></li> #}
+    {# <li><a data-fancybox-group="group" href="extra-images/flicker-image-2.jpg" #}
+    {# class="fancybox"><img #}
+    {# src="extra-images/flicker-image-2.jpg" alt=""><i #}
+    {# class="fa fa-angle-double-right"></i></a></li> #}
+    {# <li><a data-fancybox-group="group" href="extra-images/flicker-image-3.jpg" #}
+    {# class="fancybox"><img #}
+    {# src="extra-images/flicker-image-3.jpg" alt=""><i #}
+    {# class="fa fa-angle-double-right"></i></a></li> #}
+    {# <li><a data-fancybox-group="group" href="extra-images/flicker-image-4.jpg" #}
+    {# class="fancybox"><img #}
+    {# src="extra-images/flicker-image-4.jpg" alt=""><i #}
+    {# class="fa fa-angle-double-right"></i></a></li> #}
+    {# <li><a data-fancybox-group="group" href="extra-images/flicker-image-5.jpg" #}
+    {# class="fancybox"><img #}
+    {# src="extra-images/flicker-image-5.jpg" alt=""><i #}
+    {# class="fa fa-angle-double-right"></i></a></li> #}
+    {# <li><a data-fancybox-group="group" href="extra-images/flicker-image-6.jpg" #}
+    {# class="fancybox"><img #}
+    {# src="extra-images/flicker-image-6.jpg" alt=""><i #}
+    {# class="fa fa-angle-double-right"></i></a></li> #}
+    {# <li><a data-fancybox-group="group" href="extra-images/flicker-image-7.jpg" #}
+    {# class="fancybox"><img #}
+    {# src="extra-images/flicker-image-7.jpg" alt=""><i #}
+    {# class="fa fa-angle-double-right"></i></a></li> #}
+    {# <li><a data-fancybox-group="group" href="extra-images/flicker-image-8.jpg" #}
+    {# class="fancybox"><img #}
+    {# src="extra-images/flicker-image-8.jpg" alt=""><i #}
+    {# class="fa fa-angle-double-right"></i></a></li> #}
+    {# <li><a data-fancybox-group="group" href="extra-images/flicker-image-9.jpg" #}
+    {# class="fancybox"><img #}
+    {# src="extra-images/flicker-image-9.jpg" alt=""><i #}
+    {# class="fa fa-angle-double-right"></i></a></li> #}
+    {# </ul> #}
+    {# </div> #}
+    {# <!--// Widget Flicker Images \\--> #}
+
+</aside>
+<!--// SideBar \\-->

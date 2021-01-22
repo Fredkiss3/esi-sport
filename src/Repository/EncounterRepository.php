@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Encounter;
+use App\Entity\Magazine\Encounter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

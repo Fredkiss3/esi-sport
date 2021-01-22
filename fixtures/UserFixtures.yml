@@ -1,0 +1,11 @@
+App\Entity\Security\User:
+  admin:
+    email: "admin\\@esi-sport.club"
+    password: "\\$2a\\$12\\$8tVk5Z9h89pIZBmxFQBXHewZOLu.Wv3IE0jKvTtPgz2xTauFRAZRC" # "admin"
+#    roles:
+#      - ROLE_ADMIN
+#
+#  user{1..10}:
+#    username: <name()>
+#    email: <email()>
+#    password: <name()>

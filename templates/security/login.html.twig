@@ -1,42 +1,69 @@
-{% extends 'base.html.twig' %}
+{% extends "base.html.twig" %}
 
-{% block title %}Log in!{% endblock %}
+{% set active = "about" %}
 
-{% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+{% block title %}
+    Connexion
+{% endblock %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('security.logout') }}">Logout</a>
+{% block content %}
+    <!--// Main Content \\-->
+    <div class="sportsmagazine-main-content">
+
+        <!--// Main Section \\-->
+        <div class="sportsmagazine-main-section sportsmagazine-login-form-full">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="sportsmagazine-login-form">
+                            <h4>Connexion</h4>
+                            <form method="post">
+                                {% if error %}
+                                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                {% endif %}
+
+                                <input type="hidden" name="_csrf_token"
+                                       value="{{ csrf_token('authenticate') }}"
+                                >
+
+                                <ul>
+                                    <li><input type="text"
+                                               value="{{ last_username ?? 'Saisir Votre Email*' }}"
+                                               name="_email"
+                                               required
+                                               onblur="if(this.value == '') { this.value ='Saisir Votre Email*'; }"
+                                               onfocus="if(this.value =='Enter username*') { this.value = ''; }"></li>
+                                    <li><input type="text" value="Saisir Votre Mot de Passe*"
+                                               name="_password"
+                                               required
+                                               onblur="if(this.value == '') { this.value ='Saisir Votre Mot de Passe*'; }"
+                                               onfocus="if(this.value =='Password*') { this.value = ''; }">
+                                        {# <a href="#">Mot passe Oublier?</a> #}
+                                    </li>
+                                    <li>
+                                        <label class="submit-border"><input type="submit"
+                                                                            value="Se connecter"><span></span></label>
+                                    </li>
+                                </ul>
+                            </form>
+{#                            <ul class="sportsmagazine-login-social">#}
+{#                                <li><a href="https://www.facebook.com/" class="color-one"><i class="fa fa-facebook"></i>facebook</a>#}
+{#                                </li>#}
+{#                                <li><a href="https://twitter.com/login" class="color-two"><i class="fa fa-twitter"></i>Twitter</a>#}
+{#                                </li>#}
+{#                                <li><a href="https://plus.google.com/" class="color-three"><i#}
+{#                                                class="fa fa-google-plus"></i>Google+</a></li>#}
+{#                                <li><a href="https://www.instagram.com/accounts/login/" class="color-four"><i#}
+{#                                                class="fa fa-instagram"></i>Instagram</a></li>#}
+{#                            </ul>#}
+{#                            <span>Vous n'êtes pas membre?<a href="#inscr"> Inscrire maintenant ici</a></span>#}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    {% endif %}
+        <!--// Main Section \\-->
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputUsername">Username</label>
-    <input type="email" value="{{ last_username }}" name="_email" id="inputUsername" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="_password" id="inputPassword" class="form-control" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Se connecter
-    </button>
-</form>
+    </div>
+    <!--// Main Content \\-->
 {% endblock %}

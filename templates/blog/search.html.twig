@@ -1,0 +1,178 @@
+{% extends "base.html.twig" %}
+
+{# We set the active link of the menu #}
+{% set active = "blog" %}
+
+{% block title %}
+    Blog
+{% endblock %}
+
+{% block content %}
+
+    <!--// SubHeader \\-->
+    <div class="sportsmagazine-subheader">
+        <span class="subheader-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Resultat des recherches</h1>
+                </div>
+                <div class="col-md-12">
+                    <ul class="sportsmagazine-breadcrumb">
+                        <li><a href="{{ path('index') }}">Acceuil</a></li>
+                        <li>Resultat des recherches</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--// SubHeader \\-->
+
+    <!--// Main Content \\-->
+    <div class="sportsmagazine-main-content">
+
+        <!--// Main Section \\-->
+        <div class="sportsmagazine-main-section sportsmagazine-search-resultfull">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-9">
+                        <div class="sportsmagazine-form-result">
+                            {% if results|length == 0 %}
+                                <h2>Rien n'a été trouvé !!!</h2>
+                                <p>Désolé, mais aucun article ne correspond à vos termes de recherche. Veuillez
+                                    réessayer avec d'autre mots-clés.</p>
+                            {% else %}
+                                <h2>{{ results|length }} articles trouvés </h2>
+                            {% endif %}
+
+                            <form>
+                                <input type="text"
+                                       accept="{{ path('blog.search') }}"
+                                       value="{{ query }}"
+                                       name="q"
+                                       onblur="if(this.value == '') { this.value ='Type here'; }"
+                                       onfocus="if(this.value =='Type here') { this.value = ''; }">
+                                <label>
+                                    <input type="submit" value="Rechercher">
+                                </label>
+                            </form>
+                        </div>
+                        {% if results|length > 0 %}
+                            <div class="sportsmagazine-section-heading"><h2>Articles trouvés</h2></div>
+                        {% endif %}
+                        <div class="sportsmagazine-related-article">
+                            <ul class="row">
+                                {% for article_comment in results %}
+                                    {% set article = article_comment[0] %}
+                                    <li class="col-md-4">
+                                        <figure><a href="{{ path('blog.detail', {slug: article.slug}) }}"><img
+                                                        src="{{ vich_uploader_asset(article, 'imageFile')  }}"
+                                                        alt=""><i class="fa fa-link"></i></a>
+                                        </figure>
+                                        <div class="sportsmagazine-article-text">
+                                            <time datetime="{{ article.publishedAt.format("Y-m-d H:m") }}">{{ article.formatedDate }}</time>
+                                            <h5 id="{{ article.id }}"><a
+                                                        href="{{ path('blog.detail', {slug: article.slug}) }}">{{ article.title }}</a>
+                                            </h5>
+                                        </div>
+                                        <ul class="sportsmagazine-article-options">
+                                            <li><i class="fa fa-comment"></i>&nbsp;&nbsp;{{ article_comment[1] }}</li>
+                                        </ul>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!--// SideBar \\-->
+                    <aside class="col-md-3">
+
+                        <!--// Widget Popular Post \\-->
+                        <div class="sportsmagazine-widget-heading">
+                            <h2>Poste Populaire</h2>
+                        </div>
+                        <div class="widget widget_popular_post">
+                            <ul>
+                                <li>
+                                    <div class="sportsmagazine-popular-post">
+                                        <figure><a href="blog-detail.html"><img
+                                                        src="extra-images/widget-popular-post1.jpg" alt=""></a></figure>
+                                        <div class="sportsmagazine-popular-post-text">
+                                            <h5><a href="blog-detail.html">Mark Johnson has as acture and is gona</a>
+                                            </h5>
+                                            <time datetime="2008-02-14 20:00">August 23rd, 2016</time>
+                                        </div>
+                                        <span></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="sportsmagazine-popular-post">
+                                        <figure><a href="blog-detail.html"><img
+                                                        src="extra-images/widget-popular-post2.jpg" alt=""></a></figure>
+                                        <div class="sportsmagazine-popular-post-text">
+                                            <h5><a href="blog-detail.html">Mark Johnson has as acture and is gona</a>
+                                            </h5>
+                                            <time datetime="2008-02-14 20:00">August 23rd, 2016</time>
+                                        </div>
+                                        <span></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="sportsmagazine-popular-post">
+                                        <figure><a href="blog-detail.html"><img
+                                                        src="extra-images/widget-popular-post3.jpg" alt=""></a></figure>
+                                        <div class="sportsmagazine-popular-post-text">
+                                            <h5><a href="blog-detail.html">Mark Johnson has as acture and is gona</a>
+                                            </h5>
+                                            <time datetime="2008-02-14 20:00">August 23rd, 2016</time>
+                                        </div>
+                                        <span></span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="sportsmagazine-popular-post">
+                                        <figure><a href="blog-detail.html"><img
+                                                        src="extra-images/widget-popular-post4.jpg" alt=""></a></figure>
+                                        <div class="sportsmagazine-popular-post-text">
+                                            <h5><a href="blog-detail.html">Mark Johnson has as acture and is gona</a>
+                                            </h5>
+                                            <time datetime="2008-02-14 20:00">August 23rd, 2016</time>
+                                        </div>
+                                        <span></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--// Widget Popular Post \\-->
+
+                        <!--// Widget Cetagories \\-->
+                        <div class="sportsmagazine-widget-heading">
+                            <h2>Categories</h2>
+                        </div>
+                        <div class="widget widget_cetagories">
+                            <ul>
+                                <li><a href="404.html">Championnat Inter-ecole <span>( 13 )</span></a></li>
+                                <li><a href="404.html">Handball <span>( 12 )</span></a></li>
+                                <li><a href="404.html">Football <span>( 04 )</span></a></li>
+                                <li><a href="404.html">VolleyBall <span>( 08 )</span></a></li>
+                                <li><a href="404.html">BasketBall <span>( 13 )</span></a></li>
+                                <li><a href="404.html">Athletisme <span>( 13 )</span></a></li>
+                                <li><a href="404.html">Natation <span>( 13 )</span></a></li>
+                                <li><a href="404.html">Tennis <span>( 13 )</span></a></li>
+                            </ul>
+                        </div>
+                        <!--// Widget Cetagories \\-->
+
+                    </aside>
+                    <!--// SideBar \\-->
+
+
+                </div>
+            </div>
+        </div>
+        <!--// Main Section \\-->
+
+    </div>
+    <!--// Main Content \\-->
+{% endblock %}

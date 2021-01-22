@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\InterEcole;
+use App\Domain\Entity\Magazine\InterEcole;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

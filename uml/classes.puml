@@ -7,7 +7,7 @@ title ESI-SPORT Classes
 
 
 note as N1
-     L'atrribut **isReply**
+     L'attribut **isReply**
         Permet de savoir si 
         le commentaire 
         est une réponse à un autre
@@ -31,6 +31,7 @@ package Blog {
     }
 
     class Article {
+        headlineImg: Image
         title: string
         slug: string
     }
@@ -43,8 +44,8 @@ package Blog {
         id: int
         author: string
         content: string
-        isReply: bool
-        dateCreation: DateTime
+'        isReply: bool
+        createdAt: DateTime
     }
 
     class Tag {
@@ -59,7 +60,7 @@ package Blog {
     AbstractArticle .... N2
 
     Article  *--  Comment : Has 
-    Comment  *--  Comment : Is Reply
+    Comment "0..1" *-- "*"  Comment : Is Reply
     Article "Many" o-- "Many" Tag : Has
 
     AbstractArticle <|-- Article 
@@ -92,11 +93,6 @@ package SportMagazine {
     }
 
 
-    class Goal {
-        id: int
-        points: int
-        scoredAt: DateTime
-    }
 
     class Club {
         id: int
@@ -131,6 +127,7 @@ package SportMagazine {
     class InterEcole {
         id: int
         year: int
+        open: boolean
 '        negativeLossPoints: boolean
     }
 
@@ -141,10 +138,10 @@ package SportMagazine {
     Sport "One" -- "Many" Club : Is of club
     Club  *-- Player : Has
 
-    N3 ... Encounter
+    N3 . Encounter
 
 
-    Goal "One" - "One" Player : Score
+'    Goal "One" - "One" Player : Score
 
     EncounterSport "Many" -- "One" Encounter
     EncounterSport "Many" - "One" Sport
@@ -154,7 +151,7 @@ package SportMagazine {
 '    Encounter "Many" -- "One" Sport : Happens
 
     Encounter "Many" --left-- "One" Club : Plays
-    Encounter  *-- Goal : Has
+'    Encounter  *-- Goal : Has
     Player "*" - "1" Position : Is At
     Position --* Sport : Has
 

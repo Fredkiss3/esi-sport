@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Position;
+use App\Entity\Magazine\Position;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

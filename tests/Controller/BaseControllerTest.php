@@ -32,13 +32,14 @@ abstract class BaseControllerTest extends WebTestCase
 
     protected function getFixtures(bool $files = true): void
     {
-        // fixtures
-        if ($files) {
+        if(count($this->entities) == 0) {
+            // fixtures
+            if ($files) {
+                $this->entities = $this->loadFixtureFiles($this->fixturePath);
+            } else {
 
-            $this->entities = $this->loadFixtureFiles($this->fixturePath);
-        } else {
-
-            $this->entities = $this->loadFixtures($this->fixturePath);
+                $this->entities = $this->loadFixtures($this->fixturePath);
+            }
         }
     }
 

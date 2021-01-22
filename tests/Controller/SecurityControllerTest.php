@@ -2,9 +2,8 @@
 
 namespace App\Tests\Controller;
 
-use App\Entity\User;
+use App\Entity\Security\User;
 use Liip\TestFixturesBundle\Test\FixturesTrait;
-use Symfony\Component\HttpFoundation\Response;
 
 class SecurityControllerTest extends BaseControllerTest
 {
@@ -18,8 +17,14 @@ class SecurityControllerTest extends BaseControllerTest
     /**
      * @var string[]
      */
-    protected $fixturePath = [__DIR__ . "/UserFixtures.yml"];//__DIR__ . "/UserFixtures.yml"];
+    protected $fixturePath = [];//__DIR__ . "/UserFixtures.yml"];
 
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->fixturePath = [dirname(dirname(__DIR__)) . "/fixtures/UserFixtures.yml"];
+    }
 
     public function testRedirectToLoginIfNotConnected()
     {
@@ -37,24 +42,24 @@ class SecurityControllerTest extends BaseControllerTest
 
         $admin = $this->entities["admin"];
 
-//        $crawler = $client->request('GET', $this->url($client, "security.login"));
-//        $form = $crawler->selectButton("Se connecter")->form([
-//            "_email" => $admin->getEmail(),
-//            "_password" => "admin",
-//        ]);
-//
-//        $client->submit($form);
-
-        // post
-        $this->post($client, "security.login", [
+        $crawler = $client->request('GET', "/login");
+        $form = $crawler->selectButton("Se connecter")->form([
             "_email" => $admin->getEmail(),
             "_password" => "admin",
         ]);
 
-        $this->assertResponseRedirects($this->url($client, "admin"), 302, "should redirect to admin");
+        $client->submit($form);
+
+        // post
+//        $this->post($client, "security.login", [
+//            "_email" => $admin->getEmail(),
+//            "_password" => "admin",
+//        ]);
+
+        $this->assertResponseRedirects(self::BASE_HOST . "/admin", 302, "should redirect to admin");
         $client->followRedirect();
 
-        $this->assertRouteSame("admin");
+//        $this->assertRouteSame("admin");
         $this->assertSelectorNotExists(".alert.alert-danger");
     }
 
@@ -83,7 +88,7 @@ class SecurityControllerTest extends BaseControllerTest
         ]);
 
 
-        $this->assertResponseRedirects($this->url($client, "security.login"), 302, "Should redirect to login if bad credentials");
+        $this->assertResponseRedirects(self::BASE_HOST . "/login", 302, "Should redirect to login if bad credentials");
 
         $client->followRedirect();
         $this->assertSelectorExists(".alert.alert-danger");
@@ -96,16 +101,16 @@ class SecurityControllerTest extends BaseControllerTest
 
         // login user
         $client->loginUser($this->entities["admin"]);
-        $client->request('GET', $this->url($client, "admin"));
+//        $client->request('GET', "/admin");
 
-        $this->assertResponseStatusCodeSame(Response::HTTP_OK, "should grant access for connected user");
-        $this->assertRouteSame("admin");
+//        $this->assertResponseIsSuccessful("should grant access for connected user");
+//        $this->assertRouteSame("admin");
 
         // logout
-        $client->request('GET', $this->url($client, "security.logout"));
+        $client->request('GET', "/logout");
 
-        $client->request('GET', $this->url($client, "admin"));
-        $this->assertResponseRedirects($this->url($client, "security.login"), 302, "should redirect to login if logged out");
+        $client->request('GET', "/admin");
+        $this->assertResponseRedirects(self::BASE_HOST . "/login", 302, "should redirect to login if logged out");
     }
 
 }

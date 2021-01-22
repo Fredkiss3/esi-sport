@@ -1,0 +1,247 @@
+{% extends 'base.html.twig' %}
+
+{% set active = "blog" %}
+
+{% block title %}
+    Blog
+{% endblock %}
+
+
+{% block content %}
+    <!--// SubHeader \\-->
+    <div class="sportsmagazine-subheader">
+        <span class="subheader-transparent"></span>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>lIONS MAGAZINE</h1>
+                </div>
+                <div class="col-md-12">
+                    <ul class="sportsmagazine-breadcrumb">
+                        <li>Blog</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--// SubHeader \\-->
+
+    <!--// Main Content \\-->
+    <div class="sportsmagazine-main-content">
+
+        <!--// Main Section \\-->
+        <div class="sportsmagazine-main-section sportsmagazine-blogmodren-full">
+            <div class="container">
+                <div class="row">
+                    {% include "blog/_partials/_tag_sidebar.html.twig" %}
+                    {# <!--// SideBar \\--> #}
+                    {# <aside class="col-md-3"> #}
+
+                    {# <!--// Widget Popular Post \\--> #}
+                    {# <div class="sportsmagazine-widget-heading"> #}
+                    {# <h2>Mot-clés</h2> #}
+                    {# </div> #}
+                    {# <div class="widget widget_popular_post"> #}
+                    {# <ul> #}
+                    {# <li> #}
+                    {# <div class="sportsmagazine-popular-post"> #}
+                    {# <figure><a href="{{ path('blog.detail', {slug: article.slug}) }}"><img src="extra-images/widget-popular-post1.jpg" alt=""></a></figure> #}
+                    {# <div class="sportsmagazine-popular-post-text"> #}
+                    {# <h5><a href="{{ path('blog.detail', {slug: article.slug}) }}">Mark Johnson has as acture and is gona</a></h5> #}
+                    {# <time datetime="2008-02-14 20:00">August 23rd, 2016</time> #}
+                    {# </div> #}
+                    {# <span></span> #}
+                    {# </div> #}
+                    {# </li> #}
+                    {# </ul> #}
+                    {# </div> #}
+                    {# <!--// Widget Popular Post \\--> #}
+
+                    {# <!--// Widget Cetagories \\--> #}
+                    {# <div class="sportsmagazine-widget-heading"> #}
+                    {# <h2>Mot-clés</h2> #}
+                    {# </div> #}
+                    {# <div class="widget widget_cetagories"> #}
+                    {# <ul> #}
+                    {# {% for tag in tags %} #}
+                    {# <li><a href="{{ path('blog.tag', {tag: tag.tag}) }}">{{ tag.tag}} <span>( {{ tag.articles|length }} )</span></a></li> #}
+                    {# {% endfor %} #}
+                    {# </ul> #}
+                    {# </div> #}
+                    {# <!--// Widget Cetagories \\--> #}
+
+                    {# <!--// Widget Upcoming Matches \\--> #}
+                    {# <div class="sportsmagazine-widget-heading"> #}
+                    {# <h2>Matchs a venir</h2> #}
+                    {# </div> #}
+                    {# <div class="widget widget_matches"> #}
+                    {# <ul> #}
+                    {# <li> #}
+                    {# <div class="sportsmagazine-team-one"> #}
+                    {# <h6><a href="#">TheLions</a></h6> #}
+                    {# <span>Esi-Basketball</span> #}
+                    {# </div> #}
+                    {# <span>VS</span> #}
+                    {# <div class="sportsmagazine-team-two"> #}
+                    {# <h6><a href="#">Phoenix</a></h6> #}
+                    {# <span>ESMG Basketball</span> #}
+                    {# </div> #}
+                    {# </li> #}
+                    {# <li> #}
+                    {# <div class="sportsmagazine-team-one"> #}
+                    {# <h6><a href="#">TheLions</a></h6> #}
+                    {# <span>Esi-Basketball</span> #}
+                    {# </div> #}
+                    {# <span>VS</span> #}
+                    {# <div class="sportsmagazine-team-two"> #}
+                    {# <h6><a href="#">Phoenix</a></h6> #}
+                    {# <span>ESMG Basketball</span> #}
+                    {# </div> #}
+                    {# </li> #}
+                    {# <li> #}
+                    {# <div class="sportsmagazine-team-one"> #}
+                    {# <h6><a href="#">TheLions</a></h6> #}
+                    {# <span>Esi-Basketball</span> #}
+                    {# </div> #}
+                    {# <span>VS</span> #}
+                    {# <div class="sportsmagazine-team-two"> #}
+                    {# <h6><a href="#">Phoenix</a></h6> #}
+                    {# <span>ESMG Basketball</span> #}
+                    {# </div> #}
+                    {# </li> #}
+                    {# <li> #}
+                    {# <div class="sportsmagazine-team-one"> #}
+                    {# <h6><a href="#">TheLions</a></h6> #}
+                    {# <span>Esi-Basketball</span> #}
+                    {# </div> #}
+                    {# <span>VS</span> #}
+                    {# <div class="sportsmagazine-team-two"> #}
+                    {# <h6><a href="#">Phoenix</a></h6> #}
+                    {# <span>ESMG Basketball</span> #}
+                    {# </div> #}
+                    {# </li> #}
+                    {# <li> #}
+                    {# <div class="sportsmagazine-team-one"> #}
+                    {# <h6><a href="#">TheLions</a></h6> #}
+                    {# <span>Esi-Basketball</span> #}
+                    {# </div> #}
+                    {# <span>VS</span> #}
+                    {# <div class="sportsmagazine-team-two"> #}
+                    {# <h6><a href="#">Phoenix</a></h6> #}
+                    {# <span>ESMG Basketball</span> #}
+                    {# </div> #}
+                    {# </li> #}
+                    {# <li> #}
+                    {# <div class="sportsmagazine-team-one"> #}
+                    {# <h6><a href="#">TheLions</a></h6> #}
+                    {# <span>Esi-Basketball</span> #}
+                    {# </div> #}
+                    {# <span>VS</span> #}
+                    {# <div class="sportsmagazine-team-two"> #}
+                    {# <h6><a href="#">Phoenix</a></h6> #}
+                    {# <span>ESMG Basketball</span> #}
+                    {# </div> #}
+                    {# </li> #}
+                    {# <li> #}
+                    {# <div class="sportsmagazine-team-one"> #}
+                    {# <h6><a href="#">TheLions</a></h6> #}
+                    {# <span>Esi-Basketball</span> #}
+                    {# </div> #}
+                    {# <span>VS</span> #}
+                    {# <div class="sportsmagazine-team-two"> #}
+                    {# <h6><a href="#">Phoenix</a></h6> #}
+                    {# <span>ESMG Basketball</span> #}
+                    {# </div> #}
+                    {# </li> #}
+                    {# <li> #}
+                    {# <div class="sportsmagazine-team-one"> #}
+                    {# <h6><a href="#">TheLions</a></h6> #}
+                    {# <span>Esi-Basketball</span> #}
+                    {# </div> #}
+                    {# <span>VS</span> #}
+                    {# <div class="sportsmagazine-team-two"> #}
+                    {# <h6><a href="#">Phoenix</a></h6> #}
+                    {# <span>ESMG Basketball</span> #}
+                    {# </div> #}
+                    {# </li> #}
+
+                    {# </ul> #}
+                    {# </div> #}
+                    {# <!--// Widget Upcoming Matches \\--> #}
+
+                    {# <!--// Widget Flicker Images \\--> #}
+                    {# <div class="sportsmagazine-widget-heading"><h2>Flicker Images</h2></div> #}
+                    {# <div class="widget widget_gallery"> #}
+                    {# <ul> #}
+                    {# <li><a data-fancybox-group="group" href="extra-images/flicker-image-1.jpg" class="fancybox"><img src="extra-images/flicker-image-1.jpg" alt=""><i class="fa fa-angle-double-right"></i></a></li> #}
+                    {# <li><a data-fancybox-group="group" href="extra-images/flicker-image-2.jpg" class="fancybox"><img src="extra-images/flicker-image-2.jpg" alt=""><i class="fa fa-angle-double-right"></i></a></li> #}
+                    {# <li><a data-fancybox-group="group" href="extra-images/flicker-image-3.jpg" class="fancybox"><img src="extra-images/flicker-image-3.jpg" alt=""><i class="fa fa-angle-double-right"></i></a></li> #}
+                    {# <li><a data-fancybox-group="group" href="extra-images/flicker-image-4.jpg" class="fancybox"><img src="extra-images/flicker-image-4.jpg" alt=""><i class="fa fa-angle-double-right"></i></a></li> #}
+                    {# <li><a data-fancybox-group="group" href="extra-images/flicker-image-5.jpg" class="fancybox"><img src="extra-images/flicker-image-5.jpg" alt=""><i class="fa fa-angle-double-right"></i></a></li> #}
+                    {# <li><a data-fancybox-group="group" href="extra-images/flicker-image-6.jpg" class="fancybox"><img src="extra-images/flicker-image-6.jpg" alt=""><i class="fa fa-angle-double-right"></i></a></li> #}
+                    {# <li><a data-fancybox-group="group" href="extra-images/flicker-image-7.jpg" class="fancybox"><img src="extra-images/flicker-image-7.jpg" alt=""><i class="fa fa-angle-double-right"></i></a></li> #}
+                    {# <li><a data-fancybox-group="group" href="extra-images/flicker-image-8.jpg" class="fancybox"><img src="extra-images/flicker-image-8.jpg" alt=""><i class="fa fa-angle-double-right"></i></a></li> #}
+                    {# <li><a data-fancybox-group="group" href="extra-images/flicker-image-9.jpg" class="fancybox"><img src="extra-images/flicker-image-9.jpg" alt=""><i class="fa fa-angle-double-right"></i></a></li> #}
+                    {# </ul> #}
+                    {# </div> #}
+                    {# <!--// Widget Flicker Images \\--> #}
+
+                    {# </aside> #}
+                    {# <!--// SideBar \\--> #}
+
+                    <div class="col-md-9">
+                        <div class="sportsmagazine-blog sportsmagazine-blog-grid">
+                            <ul class="row">
+                                {% for article_comments in articles %}
+                                    {% set article = article_comments[0] %}
+                                    <li class="col-md-6">
+                                        <figure>
+                                            <a href="{{ path('blog.detail', {slug: article.slug}) }}"><img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt=""></a>
+                                            <figcaption>
+                                                <span><small>Featured</small></span>
+                                                <a href="{{ path('blog.detail', {slug: article.slug}) }}" class="sportsmagazine-link-btn"><i
+                                                            class="fa fa-link"></i></a>
+                                            </figcaption>
+                                        </figure>
+                                        <section>
+                                            <h2><a href="{{ path('blog.detail', {slug: article.slug}) }}">{{ article.title }}</a></h2>
+                                            <p>{{ article.excerpt }}</p>
+                                        </section>
+                                        <div class="sportsmagazine-blog-grid-options">
+{#                                            <a href="{{ path('blog.detail', {slug: article.slug}) }}" class="sportsmagazine-blog-grid-thumb"><img#}
+{#                                                        src="extra-images/blog-thumb-1.jpg" alt=""> Julia Martyn</a>#}
+                                            <ul>
+                                                <li><i class="fa fa-comment-o"></i> <a href="#">{{ article_comments[1] }}</a></li>
+                                                <li><i class="fa fa-eye"></i> <a href="#">840</a></li>
+                                                <li><i class="fa fa-share-alt"></i> <a href="#">89</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!--// Pagination \\-->
+{#                        <div class="sportsmagazine-pagination">#}
+{#                            <ul class="page-numbers">#}
+{#                                <li><a class="previous page-numbers" href="404.html"><span aria-label="Next"><i#}
+{#                                                    class="fa fa-angle-left"></i></span></a></li>#}
+{#                                <li><span class="page-numbers current">1</span></li>#}
+{#                                <li><a class="page-numbers" href="404.html">2</a></li>#}
+{#                                <li><a class="page-numbers" href="404.html">3</a></li>#}
+{#                                <li><a class="page-numbers" href="404.html">4</a></li>#}
+{#                                <li><a class="next page-numbers" href="404.html"><span aria-label="Next"><i#}
+{#                                                    class="fa fa-angle-right"></i></span></a></li>#}
+{#                            </ul>#}
+{#                        </div>#}
+                        <!--// Pagination \\-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--// Main Section \\-->
+
+    </div>
+    <!--// Main Content \\-->
+{% endblock %}
+

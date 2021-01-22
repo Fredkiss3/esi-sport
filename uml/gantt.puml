@@ -129,11 +129,11 @@ end note
 
 
 ' Tasks TimeLine
-Project starts 2021-01-03
+Project starts 2021-01-20
 
 ' Preparation
 '[E] starts 2020-12-27
-[BP] starts 2021-01-03
+[BP] starts 2021-01-20
 '[BP] starts at [E]'s end
 [CCDz] starts at [BP]'s end
 [CCBack] starts at [BP]'s end

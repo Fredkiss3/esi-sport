@@ -23,9 +23,14 @@ migration:
 
 migrate:
 	$(sc) doctrine:migrations:migrate
-test:
+
+ftest:
+	$(sc)  make:functional-test
+utest:
+	$(sc) make:unit-test
+#test:
 	# Example : make test unit|functionnal
-	$(sc) make:$(filter-out $@,$(MAKECMDGOALS))-test
+#	$(sc) make:$(filter-out $@,$(MAKECMDGOALS))-test
 #greet:
 #	@echo Hello $(filter-out $@,$(MAKECMDGOALS))
 

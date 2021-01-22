@@ -3,7 +3,7 @@ security:
     providers:
         from_database:
             entity:
-                class: App\Entity\User
+                class: App\Entity\Security\User
                 property: email
     firewalls:
         dev:
@@ -23,7 +23,7 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
 
     encoders:
-        App\Entity\User:
+        App\Entity\Security\User:
             algorithm: bcrypt
             cost: 12
 
