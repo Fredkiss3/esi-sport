@@ -1,4 +1,4 @@
-![Build Status](https://github.com/Fredkiss3/esi_sport/workflows/.github/workflows/php.yml/badge.svg)
+![Build Status](https://github.com/Fredkiss3/esi_sport/workflows/PHP%20Composer/badge.svg?branch=main)
 
 # ESI-SPORT
 
