@@ -1,5 +1,7 @@
 {
     "type": "project",
+    "name": "csdevtech/esi-sport",
+    "description": "Projet web de ESI-SPORT",
     "license": "proprietary",
     "require": {
         "php": ">=7.4",
