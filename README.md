@@ -1,3 +1,5 @@
+![Build Status](https://github.com/Fredkiss3/esi_sport/workflows/.github/workflows/php.yml/badge.svg)
+
 # ESI-SPORT
 
 Il s'agit d'un site de magazine sportif.
