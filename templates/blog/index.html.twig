@@ -194,29 +194,31 @@
                             <ul class="row">
                                 {% for article_comments in articles %}
                                     {% set article = article_comments[0] %}
-                                    <li class="col-md-6">
-                                        <figure>
-                                            <a href="{{ path('blog.detail', {slug: article.slug}) }}"><img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt=""></a>
-                                            <figcaption>
-                                                <span><small>Featured</small></span>
-                                                <a href="{{ path('blog.detail', {slug: article.slug}) }}" class="sportsmagazine-link-btn"><i
-                                                            class="fa fa-link"></i></a>
-                                            </figcaption>
-                                        </figure>
-                                        <section>
-                                            <h2><a href="{{ path('blog.detail', {slug: article.slug}) }}">{{ article.title }}</a></h2>
-                                            <p>{{ article.excerpt }}</p>
-                                        </section>
-                                        <div class="sportsmagazine-blog-grid-options">
-{#                                            <a href="{{ path('blog.detail', {slug: article.slug}) }}" class="sportsmagazine-blog-grid-thumb"><img#}
-{#                                                        src="extra-images/blog-thumb-1.jpg" alt=""> Julia Martyn</a>#}
-                                            <ul>
-                                                <li><i class="fa fa-comment-o"></i> <a href="#">{{ article_comments[1] }}</a></li>
-                                                <li><i class="fa fa-eye"></i> <a href="#">840</a></li>
-                                                <li><i class="fa fa-share-alt"></i> <a href="#">89</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
+                                        {% cache [article, article_comments[1]]  %}
+                                            <li class="col-md-6">
+                                                <figure>
+                                                    <a href="{{ path('blog.detail', {slug: article.slug}) }}"><img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt=""></a>
+                                                    <figcaption>
+                                                        <span><small>Featured</small></span>
+                                                        <a href="{{ path('blog.detail', {slug: article.slug}) }}" class="sportsmagazine-link-btn"><i
+                                                                    class="fa fa-link"></i></a>
+                                                    </figcaption>
+                                                </figure>
+                                                <section>
+                                                    <h2><a href="{{ path('blog.detail', {slug: article.slug}) }}">{{ article.title }}</a></h2>
+                                                    <p>{{ article.excerpt }}</p>
+                                                </section>
+                                                <div class="sportsmagazine-blog-grid-options">
+                                                    {#                                            <a href="{{ path('blog.detail', {slug: article.slug}) }}" class="sportsmagazine-blog-grid-thumb"><img#}
+                                                    {#                                                        src="extra-images/blog-thumb-1.jpg" alt=""> Julia Martyn</a>#}
+                                                    <ul>
+                                                        <li><i class="fa fa-comment-o"></i> <a href="#">{{ article_comments[1] }}</a></li>
+                                                        <li><i class="fa fa-eye"></i> <a href="#">840</a></li>
+                                                        <li><i class="fa fa-share-alt"></i> <a href="#">89</a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        {% endcache %}
                                 {% endfor %}
                             </ul>
                         </div>

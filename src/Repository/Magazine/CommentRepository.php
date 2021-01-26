@@ -56,6 +56,7 @@ class CommentRepository extends ServiceEntityRepository
 //            $reply->setArticle($reply->getParent()->getArticle());
 //            $employeesByCompany[$companyId][] = $employee;
         }
+//        $this->getEntityManager()->getReference()
 
         return $comments;
 //        return $this->createQueryBuilder('c')

@@ -4,7 +4,6 @@
 namespace App\Controller;
 
 
-use App\Entity\Magazine\Article;
 use App\Entity\Magazine\Comment;
 use App\Form\CommentFormType;
 use App\Repository\Magazine\ArticleRepository;

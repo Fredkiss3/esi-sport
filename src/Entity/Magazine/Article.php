@@ -3,6 +3,7 @@
 namespace App\Entity\Magazine;
 
 use App\Repository\Magazine\ArticleRepository;
+use App\Twig\CacheExtension\CacheableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,7 +19,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @UniqueEntity("slug")
  * @Vich\Uploadable
  */
-class Article extends AbstractArticle
+class Article extends AbstractArticle implements CacheableInterface
 {
     /**
      * @ORM\Id
@@ -45,7 +46,7 @@ class Article extends AbstractArticle
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @var \DateTime
+     * @var \DateTimeInterface
      */
     private $updatedAt = null;
 
@@ -197,4 +198,8 @@ class Article extends AbstractArticle
         return $this->title;
     }
 
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
 }

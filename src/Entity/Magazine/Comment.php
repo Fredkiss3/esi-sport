@@ -3,6 +3,7 @@
 namespace App\Entity\Magazine;
 
 use App\Repository\Magazine\CommentRepository;
+use App\Twig\CacheExtension\CacheableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
  */
-class Comment
+class Comment implements CacheableInterface
 {
     /**
      * @ORM\Id
@@ -35,8 +36,15 @@ class Comment
 
     /**
      * @ORM\Column(type="datetime")
+     * @var \DateTimeInterface
      */
     private $createdAt;
+
+//    /**
+//     * @ORM\Column(type="datetime")
+//     * @var \DateTimeInterface
+//     */
+//    private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="comments")
@@ -166,4 +174,9 @@ class Comment
         return $this->id;
     }
 
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        // TODO: Change this method to work with updated value
+        return $this->createdAt;
+    }
 }

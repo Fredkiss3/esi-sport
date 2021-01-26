@@ -43,28 +43,30 @@
                 <div class="row">
 
                     <div class="col-md-9">
-                        <div class="sportsmagazine-rich-editor">
-                            <article style="line-height: 26px">
-                                {{ article.content|raw }}
-                            </article>
-                            <div class="sportsmagazine-post-tags">
-                                <div class="sportsmagazine-tags">
-                                    {% for tag in article.tags %}
-                                        <a href="{{ path('blog.tag', {tag: tag.tag}) }}">#{{ tag.tag }}</a>
-                                    {% endfor %}
-                                </div>
-                                <div class="sportsmagazine-blog-social">
-                                    <ul>
-                                        <li><a href="https://www.facebook.com/" class="color-one"><i
-                                                        class="fa fa-facebook"></i>facebook</a></li>
-                                        <li><a href="https://twitter.com/login" class="color-two"><i
-                                                        class="fa fa-twitter"></i>Twitter</a></li>
-                                        <li><a href="https://plus.google.com/" class="color-three"><i
-                                                        class="fa fa-google-plus"></i>Google+</a></li>
-                                    </ul>
+                        {% cache [article, "detail"] %}
+                            <div class="sportsmagazine-rich-editor">
+                                <article style="line-height: 26px">
+                                    {{ article.content|raw }}
+                                </article>
+                                <div class="sportsmagazine-post-tags">
+                                    <div class="sportsmagazine-tags">
+                                        {% for tag in article.tags %}
+                                            <a href="{{ path('blog.tag', {tag: tag.tag}) }}">#{{ tag.tag }}</a>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="sportsmagazine-blog-social">
+                                        <ul>
+                                            <li><a href="https://www.facebook.com/" class="color-one"><i
+                                                            class="fa fa-facebook"></i>facebook</a></li>
+                                            <li><a href="https://twitter.com/login" class="color-two"><i
+                                                            class="fa fa-twitter"></i>Twitter</a></li>
+                                            <li><a href="https://plus.google.com/" class="color-three"><i
+                                                            class="fa fa-google-plus"></i>Google+</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        {% endcache %}
                         {# <div class="sportsmagazine-prenxt-post"> #}
                         {# <ul> #}
                         {# <li> #}
@@ -98,23 +100,25 @@
                         <div class="sportsmagazine-related-article sportsmagazine-blog-artical">
                             <ul class="row">
                                 {% for article in related %}
-                                    <li class="col-md-4">
-                                        <figure><a href="{{ path('blog.detail', {slug:article.slug}) }}"><img
-                                                        src="{{ vich_uploader_asset(article, 'imageFile')  }}"
-                                                        alt=""><i
-                                                        class="fa fa-link"></i></a></figure>
-                                        <div class="sportsmagazine-article-text">
-                                            <time datetime="{{ article.publishedAt.format("Y-m-d H:m") }}">{{ article.formatedDate }}</time>
-                                            <h5>
-                                                <a href="{{ path('blog.detail', {slug:article.slug}) }}">{{ article.title }}</a>
-                                            </h5>
-                                        </div>
-                                        {# <ul class="sportsmagazine-article-options"> #}
-                                        {# <li><a href="404.html"><i class="fa fa-comment-o"></i></a></li> #}
-                                        {# #}{# <li><a href="404.html"><i class="fa fa-eye"></i> 840</a></li> #}
-                                        {# #}{# <li><a href="404.html"><i class="fa fa-share-alt"></i> 89</a></li> #}
-                                        {# </ul> #}
-                                    </li>
+                                    {% cache [article, "related"] %}
+                                        <li class="col-md-4">
+                                            <figure><a href="{{ path('blog.detail', {slug:article.slug}) }}"><img
+                                                            src="{{ vich_uploader_asset(article, 'imageFile') }}"
+                                                            alt=""><i
+                                                            class="fa fa-link"></i></a></figure>
+                                            <div class="sportsmagazine-article-text">
+                                                <time datetime="{{ article.publishedAt.format("Y-m-d H:m") }}">{{ article.formatedDate }}</time>
+                                                <h5>
+                                                    <a href="{{ path('blog.detail', {slug:article.slug}) }}">{{ article.title }}</a>
+                                                </h5>
+                                            </div>
+                                            {# <ul class="sportsmagazine-article-options"> #}
+                                            {# <li><a href="404.html"><i class="fa fa-comment-o"></i></a></li> #}
+                                            {# #}{# <li><a href="404.html"><i class="fa fa-eye"></i> 840</a></li> #}
+                                            {# #}{# <li><a href="404.html"><i class="fa fa-share-alt"></i> 89</a></li> #}
+                                            {# </ul> #}
+                                        </li>
+                                    {% endcache %}
                                 {% endfor %}
                             </ul>
                         </div>
@@ -124,109 +128,111 @@
 
                             <ul class="comment-list">
                                 {% for comment in comments %}
-                                    <li>
-                                        <div class="thumb-list">
-                                            <figure><img alt="" src="{{ asset('extra-images/comment-img2.jpg') }}">
-                                            </figure>
-                                            <div class="text-holder">
-                                                <h6>{{ comment.author }}</h6>
-                                                <time class="post-date" datetime="2008-02-14 20:00">
-                                                    {% if "now"|date("Y") == comment.createdAt.format("d") %}
-                                                        écrit à {{ comment.createdAt.format("H:m") }}
-                                                    {% else %}
-                                                        écrit le {{ comment.formatedDate }}
-                                                    {% endif %}</time>
-                                                <a class="comment-reply-link"
-                                                   data-toggle="collapse" href="#reply-{{ comment.id }}"
-                                                   role="button"
-                                                   aria-expanded="false"
-                                                   aria-controls="multiCollapseExample1"
-                                                >Répondre</a>
+{#                                    {% cache comment %}#}
+                                        <li>
+                                            <div class="thumb-list">
+                                                <figure><img alt="" src="{{ asset('extra-images/comment-img2.jpg') }}">
+                                                </figure>
+                                                <div class="text-holder">
+                                                    <h6>{{ comment.author }}</h6>
+                                                    <time class="post-date" datetime="2008-02-14 20:00">
+                                                        {% if "now"|date("Y") == comment.createdAt.format("d") %}
+                                                            écrit à {{ comment.createdAt.format("H:m") }}
+                                                        {% else %}
+                                                            écrit le {{ comment.formatedDate }}
+                                                        {% endif %}</time>
+                                                    <a class="comment-reply-link"
+                                                       data-toggle="collapse" href="#reply-{{ comment.id }}"
+                                                       role="button"
+                                                       aria-expanded="false"
+                                                       aria-controls="multiCollapseExample1"
+                                                    >Répondre</a>
+                                                </div>
+                                                <p>{{ comment.content }}</p>
                                             </div>
-                                            <p>{{ comment.content }}</p>
-                                        </div>
-                                        <div class="comment-respond sportsmagazine-contact-form">
-                                            <form class="collapse multi-collapse"
-                                                  id="reply-{{ comment.id }}"
-                                                  method="POST"
-                                                  action="{{ path('comment.make', {slug: article.slug}) }}">
-                                                <ul>
-                                                    {{ csrf|raw }}
+                                            <div class="comment-respond sportsmagazine-contact-form">
+                                                <form class="collapse multi-collapse"
+                                                      id="reply-{{ comment.id }}"
+                                                      method="POST"
+                                                      action="{{ path('comment.make', {slug: article.slug}) }}">
+                                                    <ul>
+                                                        {{ csrf|raw }}
 
-                                                    <li style="">
-                                                        <label>Votre nom:</label>
-                                                        <p>
-                                                            <input type="hidden" name="comment_form[article]"
-                                                                   value="{{ article.id }}">
-                                                            <input type="hidden" name="comment_form[parent]"
-                                                                   value="{{ comment.id }}">
-                                                            <input value="Type here"
-                                                                   name="comment_form[author]"
-                                                                   onblur="if(this.value == '') { this.value ='Type here'; }"
-                                                                   onfocus="if(this.value =='Type here') { this.value = ''; }"
-                                                                   type="text"
-                                                                   required="required">
-                                                            <span><i class="fa fa-user"></i></span>
-                                                        </p>
-                                                    </li>
-                                                    <li>
-                                                        <label>Email:</label>
-                                                        <p>
-                                                            <input value="Type here"
-                                                                   onblur="if(this.value == '') { this.value ='Type here'; }"
-                                                                   onfocus="if(this.value =='Type here') { this.value = ''; }"
-                                                                   type="text">
-                                                            <span><i class="fa fa-envelope"></i></span>
-                                                        </p>
-                                                    </li>
-                                                    <li class="full-input">
-                                                        <label>Votre Commentaire:</label>
-                                                        <p>
+                                                        <li style="">
+                                                            <label>Votre nom:</label>
+                                                            <p>
+                                                                <input type="hidden" name="comment_form[article]"
+                                                                       value="{{ article.id }}">
+                                                                <input type="hidden" name="comment_form[parent]"
+                                                                       value="{{ comment.id }}">
+                                                                <input value="Type here"
+                                                                       name="comment_form[author]"
+                                                                       onblur="if(this.value == '') { this.value ='Type here'; }"
+                                                                       onfocus="if(this.value =='Type here') { this.value = ''; }"
+                                                                       type="text"
+                                                                       required="required">
+                                                                <span><i class="fa fa-user"></i></span>
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <label>Email:</label>
+                                                            <p>
+                                                                <input value="Type here"
+                                                                       onblur="if(this.value == '') { this.value ='Type here'; }"
+                                                                       onfocus="if(this.value =='Type here') { this.value = ''; }"
+                                                                       type="text">
+                                                                <span><i class="fa fa-envelope"></i></span>
+                                                            </p>
+                                                        </li>
+                                                        <li class="full-input">
+                                                            <label>Votre Commentaire:</label>
+                                                            <p>
                                                 <textarea required="required" name="comment_form[content]"
                                                           placeholder="Type here"></textarea>
-                                                            <span><i class="fa fa-comment"></i></span>
-                                                        </p>
+                                                                <span><i class="fa fa-comment"></i></span>
+                                                            </p>
 
-                                                    </li>
-                                                    <li>
-                                                        <p><label><input value="Répondre" type="submit"></label></p>
-                                                    </li>
-                                                </ul>
-                                            </form>
-                                        </div>
+                                                        </li>
+                                                        <li>
+                                                            <p><label><input value="Répondre" type="submit"></label></p>
+                                                        </li>
+                                                    </ul>
+                                                </form>
+                                            </div>
 
-                                        {% if comment.replies|length > 0 %}
-                                            <!-- .children -->
-                                            <ul class="children">
-                                                {% for reply in comment.replies %}
-                                                    <!-- #comment-## -->
-                                                    <li>
-                                                        <div class="thumb-list">
-                                                            <figure><img alt=""
-                                                                         src="{{ asset('extra-images/comment-img2.jpg') }}">
-                                                            </figure>
-                                                            <div class="text-holder">
-                                                                <h6>{{ reply.author }}</h6>
-                                                                <time class="post-date" datetime="2008-02-14 20:00">
-                                                                    {% if "now"|date("Y") == reply.createdAt.format("d") %}
-                                                                        écrit à {{ reply.createdAt.format("H:m") }}
-                                                                    {% else %}
-                                                                        écrit le {{ reply.formatedDate }}
-                                                                    {% endif %}</time>
+                                            {% if comment.replies|length > 0 %}
+                                                <!-- .children -->
+                                                <ul class="children">
+                                                    {% for reply in comment.replies %}
+                                                        <!-- #comment-## -->
+                                                        <li>
+                                                            <div class="thumb-list">
+                                                                <figure><img alt=""
+                                                                             src="{{ asset('extra-images/comment-img2.jpg') }}">
+                                                                </figure>
+                                                                <div class="text-holder">
+                                                                    <h6>{{ reply.author }}</h6>
+                                                                    <time class="post-date" datetime="2008-02-14 20:00">
+                                                                        {% if "now"|date("Y") == reply.createdAt.format("d") %}
+                                                                            écrit à {{ reply.createdAt.format("H:m") }}
+                                                                        {% else %}
+                                                                            écrit le {{ reply.formatedDate }}
+                                                                        {% endif %}</time>
+                                                                </div>
+                                                                <p>{{ reply.content }}</p>
                                                             </div>
-                                                            <p>{{ reply.content }}</p>
-                                                        </div>
 
 
-                                                    </li>
-                                                    <!-- #comment-## -->
+                                                        </li>
+                                                        <!-- #comment-## -->
 
-                                                {% endfor %}
+                                                    {% endfor %}
 
-                                            </ul>
-                                        {% endif %}
-                                        <!-- .children -->
-                                    </li>
+                                                </ul>
+                                            {% endif %}
+                                            <!-- .children -->
+                                        </li>
+{#                                    {% endcache %}#}
                                 {% else %}
                                     <h3 style="margin-bottom: 2rem">Aucun Commentaire pour l'instant</h3>
                                 {% endfor %}
