@@ -17,6 +17,6 @@
 /esi-sport
 #/uml
 /.idea
-docker-compose.yml
+#docker-compose.yml
 old/
 *.lock

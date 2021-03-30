@@ -6,6 +6,10 @@ Il s'agit d'un site de magazine sportif.
 
 ### Pré-requis
 
+Pour pouvoir lancer le projet il faut : 
+
+- Installer [docker](https://docs.docker.com/engine/install/) 
+- Installer  [docker-compose](https://docs.docker.com/compose/install/)
 - avoir `composer` installé
 - avoir `php >= 7.2` installé
 - avoir `MySQL >= 5.0` installé
@@ -38,7 +42,8 @@ php bin/console doctrine:migrations:migrate
 3- Lancer le serveur :
 
 ```bash
-php -S localhost:8000 -t public
+docker-compose up -d            # pour activer le cache redis
+php -S localhost:8000 -t public # pour lancer le serveur PHP
 ```
 
 4- Pour générer des données par défaut vous pouvez effectuer la commande : 
