@@ -2,6 +2,8 @@
 
 # ESI-SPORT
 
+![ScreenShot](screenshot.png)
+
 Il s'agit d'un site de magazine sportif.
 
 ### Pré-requis
